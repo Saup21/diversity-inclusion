@@ -17,3 +17,17 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+class Comment(models.Model):
+    postconnect = models.ForeignKey(Post, on_delete=models.CASCADE)
+    username = models.CharField(max_length=112, null=True, blank=True)
+    comment = models.CharField(max_length=512)
+    timestamp = models.DateTimeField(default=timezone.now)
+
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+
+    class Meta:
+        ordering = ['-timestamp']
+
