@@ -2,11 +2,22 @@
 
 {% block content %}
 {% for post in posts %}
-    <h3>{{ post.title }}</h3>
-    <time>{{ post.published_date }}</time>
-    <p>{{ post.text|linebreaksbr }}</p>
-    {% if post.image %}
-        <img src="{{ post.image.url }}" alt="Image">
-    {% endif %}
+    <div class="container">
+        <div class="card card-login mx-auto mt-5">
+           <div class="card-header card-srow">
+               <div class="time-row">
+                   <time class="dt">{{ post.published_date }}</time>
+               </div>
+               <div class="title-row">
+                   <a class="title" href="{% url 'detail' pk=post.pk %}"><u>{{ post.title }}</u></a>
+               </div>
+           </div>
+           <div class="card-body">
+               <article class="text">
+                   {{ post.text|linebreaksbr }}
+               </article>
+           </div>
+       </div>
+    </div>
 {% endfor %}
 {% endblock %}
