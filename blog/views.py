@@ -37,7 +37,7 @@ def new_post(request):
 def detailpost(request, pk):
     post = Post.objects.get(pk=pk)
     form = CommentForm()
-    comment = Comment.objects.all()
+    comment = Comment.objects.filter(postconnect = post)
     context = {
         'post':post,
         'form':form,
@@ -52,7 +52,8 @@ def comm(request, pk):
     context = {
         'form':form,
     }
-    comment = Comment.objects.values()
+    post = Post.objects.get(pk=pk)
+    comment = Comment.objects.filter(postconnect=post).values()
     comm = list(comment)
     if request.method == "POST":
         form = CommentForm(request.POST)
@@ -61,7 +62,7 @@ def comm(request, pk):
             instance  = form.save(commit=False)
             instance.postconnect = obj
             instance.publish()
-            comment = Comment.objects.values()
+            comment = Comment.objects.filter(postconnect=post).values()
             comm = list(comment)
             return JsonResponse({'status':1,'comment':comm})
         else:
