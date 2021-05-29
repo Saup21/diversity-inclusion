@@ -22,6 +22,7 @@ def new_post(request):
     
     if request.method == 'POST':
         form = PostcreationForm(request.POST, request.FILES)
+        # password = 000000
         if form.is_valid():
             instance = form.save(commit=False)
             instance.author = request.user
