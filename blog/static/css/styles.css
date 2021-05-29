@@ -1,0 +1,15 @@
+* {
+    background: black;
+    color :snow ;
+}
+body {
+    background-color: black;
+}
+
+
+.card {
+    background-color: rgba(31, 31, 31, 0.75);
+}
+.time-row , .title-row , .card-header , .dt , .card-body {
+    background-color: rgba(31, 31, 31, 0.75);
+}

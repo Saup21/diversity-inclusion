@@ -1,0 +1,22 @@
+.time-row , h4 , .image , .text {
+    background-color: inherit;
+    text-align: center;
+}
+
+h4 , .time-row {
+    text-align: left;
+    padding-bottom: 10px;
+}
+
+.image {
+    padding-top : 10px;
+    padding-bottom: 10px;
+}
+
+.text {
+    text-align: justify;
+}
+
+.comment {
+    background-color: rgb(195, 248, 144);
+}
