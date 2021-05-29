@@ -1,0 +1,14 @@
+input {
+    background-color: white;
+}
+#id_text {
+    background-color: white;
+} 
+#id_image {
+    background-color: inherit;
+}
+
+form {
+    padding-left: 150px;
+    padding-top: 75px;
+}

@@ -9,11 +9,11 @@
                    <time class="dt">{{ post.published_date }}</time>
                </div>
                <div class="title-row">
-                   <a class="title" href="{% url 'detail' pk=post.pk %}"><u>{{ post.title }}</u></a>
+                   <a class="title" href="{% url 'detail' pk=post.pk %}">{{ post.title }}</a>
                </div>
            </div>
            <div class="card-body">
-               <article class="text">
+               <article class="text" style="background-color: inherit;;">
                    {{ post.text|linebreaksbr }}
                </article>
            </div>
