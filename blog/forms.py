@@ -4,15 +4,17 @@ from .models import Post, Comment
 # Necessary forms:
 
 class PostcreationForm(forms.ModelForm):
+    email = forms.EmailField()
 
     class Meta:
         model = Post
-        fields = ['title', 'text', 'image']
+        fields = ['title', 'email', 'text', 'image']
 
     def __init__(self, *args, **kwargs):
         super(PostcreationForm, self).__init__(*args, **kwargs)
         self.fields['title'].widget = forms.TextInput(attrs={'type':'text','class':'form-control','id':'title','placeholder':'Title.....'})
         self.fields['text'].widget = forms.Textarea(attrs={'type':'text','class':'form-control','id':'detail','placeholder':'Detail....'})
+        self.fields['email'].widget = forms.EmailInput(attrs={'type':'text','class':'form-control','id':'email', 'name': 'email', 'placeholder':'Your Email.....'})
         # self.fields['image'].widget = forms.
 
 
