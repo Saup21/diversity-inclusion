@@ -57,7 +57,7 @@ div.title-row.pdet {
 
 div.card-header.card-srow {
     min-height: 67.2px;
-    background-color: #d9b3ff;
+    background-color: rgba(170, 163, 163, 0.35);
 }
 
 div.col-11.col-sm-11 {
@@ -176,5 +176,13 @@ p.footsy.posd {
 
     p.title {
         line-height: 3.2rem;
+    }
+}
+
+
+@media screen and (max-width:480px){
+    img{
+        width: 200px;
+        height: 200px;
     }
 }

@@ -12,7 +12,7 @@
                <h4><u>{{ post.title }}</u></h4>
            </div>
             {% if post.image %}
-                <img src="{{post.image.url}}">
+            <div class="jaadu" style="text-align: center;"><img src="{{post.image.url}}" style="border-radius:10px;max-width: 400px;max-height: 400px;text-align: center ;"></div>
             {% endif %}
        </div>
        <div class="card-body">
@@ -20,18 +20,23 @@
                {{ post.text|linebreaksbr }}
            </article>
        </div>
-       <a href="{% url 'password' %}" class="btn btn-dark">Edit</a>
+       <div style="text-align : center;">
+        <a href="{% url 'password' %}" class="btn btn-dark" style="min-width: 200px;" >Edit</a>
+    </div>
+        
+        
    </div>
    
    <form action="." method="POST" class="my-1">
        {% csrf_token %}
        <div class="form-group">
            <div class="row">
-               <div class="col-10">
+               <div class="col-11">
                 {{form.comment}}
                </div>
+               <!-- <div class="col-1"></div> -->
                <div class="col-1">
-                <button type="submit" id="com" class="btn btn-success">Comment</button>
+                <button type="submit" id="com" class="btn btn-success" style="float: left;" >comment</button>
                </div>
            </div>
        </div>
