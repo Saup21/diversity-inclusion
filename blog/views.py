@@ -19,7 +19,7 @@ def blog(request):
 
 
 def new_post(request):
-    
+
     if request.method == 'POST':
         form = PostcreationForm(request.POST, request.FILES)
         # password = 000000
@@ -33,11 +33,11 @@ def new_post(request):
                 except Post.DoesNotExist:
                     x = None
                 if x:
-                    password = randompassword() 
+                    password = randompassword()
                 else:
                     instance.password = password
                     print(password)
-                    break  
+                    break
             instance.publish()
             return redirect('blog')
         else:
@@ -45,7 +45,7 @@ def new_post(request):
     else:
         form = PostcreationForm()
     return render(request, 'blog/new_post.html', {'form': form})
-    
+
 
 
 def detailpost(request, pk):
@@ -114,5 +114,21 @@ def action(request, pk):
     }
     return render(request, 'blog/action.html',context)
 
-def edit(request):
-    pass
+def delete(request, pk):
+    post = Post.objects.get(pk=pk)
+    post.delete()
+    return redirect('blog')
+
+def edit(request, pk):
+    post = Post.objects.get(pk=pk)
+    form = PostcreationForm(instance=post)
+    if request.method == 'POST':
+        form = PostcreationForm(request.POST, request.FILES)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.password = post.password
+            instance.pk = post.pk
+            instance.save()
+            return redirect('detail', pk=pk)
+    else:
+        return render(request, 'blog/post_edit.html', {'form': form})
