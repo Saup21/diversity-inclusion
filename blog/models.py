@@ -9,7 +9,7 @@ class Post(models.Model):
     password = models.PositiveBigIntegerField(blank=True, default=000000)
     title = models.CharField(max_length=40)
     text = models.TextField()
-    image = models.ImageField(default='avatar.jpg', upload_to='images')
+    image = models.ImageField(blank=True, null=True, upload_to='images')
     published_date = models.DateTimeField(default=timezone.now)
 
     def publish(self):
@@ -21,7 +21,6 @@ class Post(models.Model):
 
 class Comment(models.Model):
     postconnect = models.ForeignKey(Post, on_delete=models.CASCADE)
-    username = models.CharField(max_length=112, null=True, blank=True)
     comment = models.CharField(max_length=512)
     timestamp = models.DateTimeField(default=timezone.now)
 
@@ -31,4 +30,3 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['-timestamp']
-
