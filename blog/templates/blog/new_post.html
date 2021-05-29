@@ -1,9 +1,28 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button  class="btn btn-primary" type="submit">Post</button>
-</form>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/newPost_styles.css' %}" >
+
+<div class="container my-4">
+    <div class="jumbotron">
+        <div class="mb-4">
+            <h4>Add Post</h4>
+        </div>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                {{form.title}}
+            </div>
+            <div class="form-group">
+                {{form.text}}
+            </div>
+            <div class="form-group">
+                {{form.image}}
+            </div>
+            <button  class="btn btn-primary" type="submit">Post</button>
+        </form>
+    </div>
+</div> 
 {% endblock %}
+

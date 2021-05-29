@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="container my-4">
+    <div class="jumbotron">
+        <form action="." method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                {{form.password}}
+            </div>
+            <div class="container">
+                {% for e in form.password.errors %}
+                <div class="small">
+                    {{e}}
+                </div>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-success">Authenticate</button>
+        </form>
+        <div class="container">
+            {% for m in messages %}
+            <small>{{m}}</small>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -3,37 +3,50 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .forms import CommentForm, PostcreationForm
+from .forms import CommentForm, PostcreationForm, PassForm
 from .models import Comment, Post
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.http.response import JsonResponse
+from . utils import randompassword
 # Create your views here.
 
 def blog(request):
     posts = Post.objects.all().order_by('-published_date')
     return render(request, 'blog/post_list.html', {'posts': posts})
 
-@login_required(login_url='admin')
-def new_post(request):
-    if request.user.is_authenticated:
-        if request.method == 'POST':
-            form = PostcreationForm(request.POST, request.FILES)
-            if form.is_valid():
-                instance = form.save(commit=False)
-                instance.author = request.user
-                instance.publish()
-                return redirect('blog')
-            else:
-                return render(request, 'blog/new_post.html', {'form':form})
-        else:
-            form = PostcreationForm()
-        return render(request, 'blog/new_post.html', {'form': form})
-    else:
-        return redirect('admin')
 
-@login_required(login_url='admin')
+
+def new_post(request):
+    
+    if request.method == 'POST':
+        form = PostcreationForm(request.POST, request.FILES)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.author = request.user
+            password = randompassword()
+            while(True):
+                try:
+                    x = Post.objects.get(password=password)
+                except Post.DoesNotExist:
+                    x = None
+                if x:
+                    password = randompassword() 
+                else:
+                    instance.password = password
+                    print(password)
+                    break  
+            instance.publish()
+            return redirect('blog')
+        else:
+            return render(request, 'blog/new_post.html', {'form':form})
+    else:
+        form = PostcreationForm()
+    return render(request, 'blog/new_post.html', {'form': form})
+    
+
+
 def detailpost(request, pk):
     post = Post.objects.get(pk=pk)
     form = CommentForm()
@@ -46,7 +59,8 @@ def detailpost(request, pk):
     }
     return render(request, 'blog/blog_detail.html',context)
 
-@login_required(login_url='admin')
+
+
 def comm(request, pk):
     form = CommentForm()
     context = {
@@ -69,3 +83,35 @@ def comm(request, pk):
             return JsonResponse({'status':0,'comment':comm})
 
     return render(request, 'blog/blog_detail.html',context)
+
+def passpage(request):
+    form =PassForm()
+    if request.method == "POST":
+        form = PassForm(request.POST)
+        if form.is_valid():
+            passw = form.cleaned_data.get('password')
+            try:
+                x = Post.objects.get(password=passw)
+            except Post.DoesNotExist:
+                x = None
+            if x:
+                id = x.pk
+                return redirect('action', pk=id)
+            else:
+                messages.error(request,"Credential is wrong")
+        else:
+            return render(request,'blog/postpass.html',{'form':form})
+    context = {
+        'form':form,
+    }
+    return render(request,'blog/postpass.html',context)
+
+def action(request, pk):
+    obj = Post.objects.get(pk=pk)
+    context = {
+        'ob':obj,
+    }
+    return render(request, 'blog/action.html',context)
+
+def edit(request):
+    pass
