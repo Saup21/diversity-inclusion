@@ -10,6 +10,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.http.response import JsonResponse
 from . utils import randompassword
+from django.core.mail import send_mail
+from django.conf import settings
 # Create your views here.
 
 def blog(request):
@@ -36,6 +38,9 @@ def new_post(request):
                     password = randompassword()
                 else:
                     instance.password = password
+                    fmessage = f'Use this password for deleting or editting your just created Post- {password}'
+                    email = request.POST['email']
+                    send_mail('Password for your post',fmessage, settings.EMAIL_HOST_USER,[email], fail_silently=False)
                     print(password)
                     break
             instance.publish()
@@ -130,5 +135,7 @@ def edit(request, pk):
             instance.pk = post.pk
             instance.save()
             return redirect('detail', pk=pk)
+        else:
+            return render(request, 'blog/post_edit.html', {'form': form})
     else:
         return render(request, 'blog/post_edit.html', {'form': form})
