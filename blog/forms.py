@@ -34,3 +34,16 @@ class PassForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(PassForm, self).__init__(*args, **kwargs)
         self.fields['password'].widget = forms.NumberInput(attrs={'type':'number','class':'form-control','placeholder':'Password....','id':'password','name':'password'})
+
+
+class EditForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'text', 'image']
+
+    def __init__(self, *args, **kwargs):
+        super(EditForm, self).__init__(*args, **kwargs)
+        self.fields['title'].widget = forms.TextInput(attrs={'type':'text','class':'form-control','id':'title','placeholder':'Title.....'})
+        self.fields['text'].widget = forms.Textarea(attrs={'type':'text','class':'form-control','id':'detail','placeholder':'Detail....'})
+        # self.fields['email'].widget = forms.EmailInput(attrs={'type':'text','class':'form-control','id':'email', 'name': 'email', 'placeholder':'Your Email.....'})
+        # self.fields['image'].widget = forms.

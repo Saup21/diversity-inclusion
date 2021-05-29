@@ -13,14 +13,24 @@
             {% csrf_token %}
             <div class="form-group">
                 {{form.title}}
+                {% for e in form.title.errors %}
+                <div class="small alert-danger mt-2 text-center">{{e}}</div>
+                {% endfor %}
             </div>
             <div class="form-group">
                 {{form.text}}
+                {% for e in form.text.errors %}
+                <div class="small alert-danger mt-2 text-center">{{e}}</div>
+                {% endfor %}
             </div>
             <div class="form-group">
                 {{form.image}}
+                {% for e in form.image.errors %}
+                <div class="small alert-danger mt-2 text-center">{{e}}</div>
+                {% endfor %}
             </div>
-            <button  class="btn btn-primary" type="submit">Post</button>
+            <button  class="btn btn-primary" type="submit">Edit</button>
+            <a href="{% url 'delete' pkk  %}" class="btn btn-danger" style="float:right;" type="submit">Delete</button>
         </form>
     </div>
 </div>

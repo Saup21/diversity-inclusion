@@ -13,15 +13,27 @@
             {% csrf_token %}
             <div class="form-group">
                 {{form.title}}
+                {% for e in form.title.errors %}
+                <div class="small alert-danger mt-2 text-center">{{e}}</div>
+                {% endfor %}
             </div>
             <div class="form-group">
                 {{form.email}}
+                {% for e in form.email.errors %}
+                <div class="small alert-danger mt-2 text-danger">{{e}}</div>
+                {% endfor %}
             </div>
             <div class="form-group">
                 {{form.text}}
+                {% for e in form.text.errors %}
+                <div class="small alert-danger mt-2 text-center">{{e}}</div>
+                {% endfor %}
             </div>
             <div class="form-group">
                 {{form.image}}
+                {% for e in form.image.errors %}
+                <div class="small alert-danger mt-2 text-center">{{e}}</div>
+                {% endfor %}
             </div>
             <button  class="btn btn-primary" type="submit">Post</button>
         </form>

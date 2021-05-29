@@ -20,7 +20,9 @@
                {{ post.text|linebreaksbr }}
            </article>
        </div>
+       <a href="{% url 'password' %}" class="btn btn-dark">Edit</a>
    </div>
+   
    <form action="." method="POST" class="my-1">
        {% csrf_token %}
        <div class="form-group">

@@ -17,8 +17,10 @@
                    {{ post.text|linebreaksbr }}
                </article>
            </div>
-           <a href="{% url 'password' %}" class="btn btn-dark">Enter Credentials</a>
+           <!-- <a href="{% url 'password' %}" class="btn btn-dark">Enter Credentials</a> -->
        </div>
     </div>
+{% empty %}
+    <h4 style="margin-top:10%; text-align:center;">No such micro-blog exists.</h4>
 {% endfor %}
 {% endblock %}

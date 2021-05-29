@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .forms import CommentForm, PostcreationForm, PassForm
+from .forms import CommentForm, PostcreationForm, PassForm,EditForm
 from .models import Comment, Post
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
@@ -16,7 +16,14 @@ from django.conf import settings
 
 def blog(request):
     posts = Post.objects.all().order_by('-published_date')
-    return render(request, 'blog/post_list.html', {'posts': posts})
+    q=''
+    if request.method == "GET":
+        q = request.GET.get('search')
+        if q:
+            print(q)
+            posts = posts.filter(title__icontains=q).order_by('-published_date')
+   
+    return render(request, 'blog/post_list.html', {'posts': posts,'q':q})
 
 
 
@@ -102,7 +109,7 @@ def passpage(request):
                 x = None
             if x:
                 id = x.pk
-                return redirect('action', pk=id)
+                return redirect('edit', pk=id)
             else:
                 messages.error(request,"Credential is wrong")
         else:
@@ -126,9 +133,10 @@ def delete(request, pk):
 
 def edit(request, pk):
     post = Post.objects.get(pk=pk)
-    form = PostcreationForm(instance=post)
+    form = EditForm(instance=post)
+    pkk = pk
     if request.method == 'POST':
-        form = PostcreationForm(request.POST, request.FILES)
+        form = EditForm(request.POST, request.FILES)
         if form.is_valid():
             instance = form.save(commit=False)
             instance.password = post.password
@@ -136,6 +144,6 @@ def edit(request, pk):
             instance.save()
             return redirect('detail', pk=pk)
         else:
-            return render(request, 'blog/post_edit.html', {'form': form})
+            return render(request, 'blog/post_edit.html', {'form': form, 'pkk':pkk})
     else:
-        return render(request, 'blog/post_edit.html', {'form': form})
+        return render(request, 'blog/post_edit.html', {'form': form, 'pkk':pkk})
