@@ -1,5 +1,7 @@
 {% extends 'blog/base.html' %}
 
+{% block search %}
+{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -8,35 +10,36 @@
            <div class="time-row">
                <time class="dt">{{ post.published_date }}</time>
            </div>
-           <div class="title-row">
-               <h4><u>{{ post.title }}</u></h4>
-           </div>
+           <!-- <div class="title-row">
+               <p class="title"><u>{{ post.title }}</u></p>
+           </div> -->
             {% if post.image %}
             <div class="jaadu" style="text-align: center;"><img src="{{post.image.url}}" style="border-radius:10px;max-width: 400px;max-height: 400px;text-align: center ;"></div>
             {% endif %}
+            <div class="my-2 title-row text-center">
+                <p class="title"><u>{{ post.title }}</u></p>
+            </div>
        </div>
        <div class="card-body">
            <article class="text">
                {{ post.text|linebreaksbr }}
            </article>
        </div>
-       <div style="text-align : center;">
+       <!-- <div style="text-align : center;">
         <a href="{% url 'password' %}" class="btn btn-dark" style="min-width: 200px;" >Edit</a>
-    </div>
-        
-        
+    </div> -->
+
    </div>
-   
+
    <form action="." method="POST" class="my-1">
        {% csrf_token %}
        <div class="form-group">
-           <div class="row">
-               <div class="col-11">
-                {{form.comment}}
+           <div class="cement">
+               <div class="cbox">
+                   {{form.comment}}
                </div>
-               <!-- <div class="col-1"></div> -->
-               <div class="col-1">
-                <button type="submit" id="com" class="btn btn-success" style="float: left;" >comment</button>
+               <div>
+                   <button type="submit" id="com" class="btn btn-success btn-md"><i class="fas fa-paper-plane"></i></button>
                </div>
            </div>
        </div>
@@ -44,7 +47,7 @@
 
    <div class="container my-3" id="baharkadiv">
        {% for c in comment %}
-    <div class="alert alert-secondary" role="alert" id="commentdiv">
+    <div class="commw alert alert-secondary" role="alert" id="commentdiv">
         {{c.comment}}
       </div>
       {% endfor %}
