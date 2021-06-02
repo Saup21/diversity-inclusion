@@ -8,7 +8,7 @@
                <div class="time-row">
                    <time class="dt">{{ post.published_date }}</time>
                </div>
-               <div class="title-row">
+               <div class="title-row text-center">
                    <a class="title" href="{% url 'detail' pk=post.pk %}">{{ post.title }}</a>
                </div>
            </div>
@@ -17,7 +17,25 @@
                    {{ post.text|linebreaksbr }}
                </article>
            </div>
-           <!-- <a href="{% url 'password' %}" class="btn btn-dark">Enter Credentials</a> -->
+
+
+       </div>
+       <div class="options">
+           <div class="upv mt-1 mx-2">
+               <ul class="px-0">
+                   <li><a href="#" class="btn btn-success"><i class="fas fa-arrow-up"></i></a></li>
+                   <li><p class="text-success text-center">123</p></li>
+               </ul>
+           </div>
+           <div class="downv mt-1 mx-2">
+               <ul class="px-0">
+                   <li><a href="#" class="btn btn-danger"><i class="fas fa-arrow-down"></i></a></li>
+                   <li><p class="text-danger text-center">123</p></li>
+               </ul>
+           </div>
+           <div>
+               <a href="{% url 'password' pk=post.pk %}" class="btn btn-dark mt-1 mx-2" style="max-width: 40px;"><i class="fas fa-edit"></i></a>
+           </div>
        </div>
     </div>
 {% empty %}

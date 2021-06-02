@@ -1,16 +1,21 @@
 body {
     margin-bottom: 3%;
+    background: url("../images/cool-background.png") no-repeat center center fixed;
+    background-size: cover;
 }
 
+nav.bg-dark {
+    background-image: linear-gradient(55deg, #99d6ff, #7733ff);
+}
 
 a.bnbr {
     font-family: sans-serif, serif;
-    font-size: 34px;
+    font-size: 30px;
     font-weight: 700;
 }
 
 a.ni {
-    font-size: 25px;
+    font-size: 22px;
 }
 
 a.cur {
@@ -48,7 +53,7 @@ div.time-row {
 }
 
 div.title-row {
-    line-height: 1.7rem;
+    line-height: 2.5rem;
 }
 
 div.title-row.pdet {
@@ -78,6 +83,10 @@ button.ansh {
     height: 50px;
     border-radius: 50%;
     margin: 4px;
+}
+
+div.options {
+    display: flex;
 }
 
 i.sham {
@@ -125,29 +134,53 @@ button.afrm a {
     color: white;
 }
 
-/* p.footsy {
-    margin-top: 3%;
-    margin-bottom: 3%;
+ul {
+    list-style: none;
 }
 
-p.footsy.posd {
-    position: fixed;
-    bottom: 0;
-    left: 40%;
+li p {
+    font-weight: 800;
 }
-.footer-moto{
-    position: absolute;
-    left: 50%;
-    right: 50%;
-    transform: translate(-50%, -50%);
-    bottom: 1%;
-    width: 300px;
-    height: 30px;
-    text-align: center;
-    font-size:1vw;
+
+div.cbox {
+    width: 100%;
+    margin-right: 4px;
 }
- */
+
+div.commw {
+    word-wrap: break-word;
+}
+
+div.cement {
+    display: flex;
+}
+
+.my-3 {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
 @media screen and (max-width: 572px) {
+
+    a.bnbr {
+        font-size: 24px;
+    }
+
+    .my-3 {
+        padding-left: 13px;
+    }
+
+    div.cbox {
+        margin-left: 2.5%;
+    }
+
+    div.options {
+        margin-left: 9px;
+    }
+
+    a.ni {
+        font-size: 18px;
+    }
 
     div.shh {
         padding-left: 0px !important;
@@ -184,5 +217,11 @@ p.footsy.posd {
     img{
         width: 200px;
         height: 200px;
+    }
+
+
+
+    .my-3 {
+        padding-left: 10.5px;
     }
 }
