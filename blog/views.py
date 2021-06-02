@@ -97,14 +97,14 @@ def comm(request, pk):
 
     return render(request, 'blog/blog_detail.html',context)
 
-def passpage(request):
+def passpage(request, pk):
     form = PassForm()
     if request.method == "POST":
         form = PassForm(request.POST)
         if form.is_valid():
             passw = form.cleaned_data.get('password')
             try:
-                x = Post.objects.get(password=passw)
+                x = Post.objects.get(password=passw, pk=pk)
             except Post.DoesNotExist:
                 x = None
             if x:
