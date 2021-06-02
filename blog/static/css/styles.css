@@ -85,6 +85,10 @@ button.ansh {
     margin: 4px;
 }
 
+div.options {
+    display: flex;
+}
+
 i.sham {
     color: #333333;
 }
@@ -130,6 +134,14 @@ button.afrm a {
     color: white;
 }
 
+ul {
+    list-style: none;
+}
+
+li p {
+    font-weight: 800;
+}
+
 div.cbox {
     width: 100%;
     margin-right: 4px;
@@ -160,6 +172,10 @@ div.cement {
 
     div.cbox {
         margin-left: 2.5%;
+    }
+
+    div.options {
+        margin-left: 9px;
     }
 
     a.ni {
@@ -202,6 +218,8 @@ div.cement {
         width: 200px;
         height: 200px;
     }
+
+
 
     .my-3 {
         padding-left: 10.5px;

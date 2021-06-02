@@ -22,7 +22,7 @@ def blog(request):
         if q:
             print(q)
             posts = posts.filter(title__icontains=q).order_by('-published_date')
-   
+
     return render(request, 'blog/post_list.html', {'posts': posts,'q':q})
 
 
@@ -98,7 +98,7 @@ def comm(request, pk):
     return render(request, 'blog/blog_detail.html',context)
 
 def passpage(request):
-    form =PassForm()
+    form = PassForm()
     if request.method == "POST":
         form = PassForm(request.POST)
         if form.is_valid():
